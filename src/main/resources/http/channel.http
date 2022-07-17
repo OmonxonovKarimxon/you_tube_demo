@@ -1,0 +1,29 @@
+POST localhost:8080/channel/user/create
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc2OTAzODUsImV4cCI6MTY1NzY5Mzk4NSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.sOw0UfchEW4tHwgQ2OW-ddNbh30tswXfmMwqu53VY4E
+
+{
+  "name": "shohland"
+}
+###
+PUT localhost:8080/channel/adminAndUser/update
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc2NDc4NDAsImV4cCI6MTY1NzY1MTQ0MCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.848YpUWnYGaqaFzhkCBgh6QR7ydTzbWhiHxPEg8R9IQ
+
+{
+  "id": "4028818681f3823c0181f3852a1f0000",
+  "bannerId": "qwertyu"
+
+
+}
+###
+GET localhost:8080/channel/pagination
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc2NTIxMjcsImV4cCI6MTY1NzY1NTcyNywiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.wuBA2NEYJmW9tZUJzrrOBpKo9FgeCqLiwcSm1ONfchk
+###
+GET localhost:8080/channel/adminAndUser/getById/4028818681f3823c0181f3852a1f0000
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc2ODcxMTcsImV4cCI6MTY1NzY5MDcxNywiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.pH4_5ezPetrSXLrkXlVf6MqkFc2zWeMnMwBtD-ok_8c
+
+###
+GET localhost:8080/channel/user/channelList
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc2OTAzODUsImV4cCI6MTY1NzY5Mzk4NSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.sOw0UfchEW4tHwgQ2OW-ddNbh30tswXfmMwqu53VY4E

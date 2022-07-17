@@ -1,0 +1,28 @@
+POST localhost:8080/profile/public/registration
+Content-Type: application/json
+
+{
+  "email": "omonxonovsaidkarim1998@gmail.com",
+  "password": "4679",
+  "name": "mirsaid",
+  "surname": "tursunov",
+  "mainPhoto": "f32e5d33-77c5-4009-adf8-040ccbb6816d"
+
+}
+
+###
+PUT localhost:8080/profile/user/changePassword
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTcwOTUyNTYsImV4cCI6MTY1NzA5ODg1NiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.MZry8N65PZZcAaPWfa9Kpmp9v2cwK1c5ABvQUV7bPJ8
+
+{
+  "email": "shoh@gmail.com",
+  "password": "1234",
+  "name": "karimxon",
+  "surname": "omonxonov",
+  "mainPhoto": "f32e5d33-77c5-4009-adf8-040ccbb6816d"
+}
+###
+GET localhost:8080/profile/user/getProfileDetail
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTcwOTkwNTQsImV4cCI6MTY1NzEwMjY1NCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.PIrsdMLZBFtKc4gP_Z1mBIjAK9dPXWBGizAhjKaTmj8
+

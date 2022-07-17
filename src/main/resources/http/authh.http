@@ -1,0 +1,40 @@
+POST localhost:8080/auth/public/registration
+Content-Type: application/json
+
+{
+  "name": "shoh",
+  "surname": "Qurbonov",
+  "email": "suxrobbek997@gmail.com",
+  "password": "1111"
+}
+
+###
+POST localhost:8080/auth/public/login
+Content-Type: application/json
+
+{
+  "email": "shoh@gmail.com",
+  "password": "1111"
+}
+
+###
+POST localhost:8080/auth/public/login
+Content-Type: application/json
+
+{
+  "email": "omonxonovsaidkarim1998@gmail.com",
+  "password": "00"
+}
+
+###
+GET localhost:8080/profile/user/getProfileDetail/jahon@gmail.com
+###
+PUT localhost:8080/auth/public/email/updateEmail
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc2MDkxMTgsImV4cCI6MTY1NzYxMjcxOCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjozNH0.LCeReigsfKktdRfq_QEyLuW6PYRQ2f_yS8HUSy0Scd8
+
+{
+"email": "maverickfrank77@gmail.com"
+}
+###
+GET localhost:8080/auth/public/email/verification/eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc3ODY3MzksImV4cCI6MTY1Nzc5MDMzOSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjozfQ.oKQgDPNzIjqLFRuuCIM9vRCGP8Oc_Et95dvtSlC6D-Y

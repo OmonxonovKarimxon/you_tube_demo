@@ -1,0 +1,22 @@
+POST localhost:8080/video_like/like
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5OTQ5MzksImV4cCI6MTY1Nzk5ODUzOSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.n9Ju0RPmoOZgFprH00arn8RHMbFWrUL8zkqcJlkUAHY
+
+{
+  "videoId": "8a8a845c820147ff0182014cc59a0000"
+}
+
+###
+ POST localhost:8080/video_like/dislike
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5NzQyNTEsImV4cCI6MTY1Nzk3Nzg1MSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.-BYLQ7UBu5XG-RJE2dnuMuWu6CsvYkK1hfSa7E1Rn4M
+
+{
+  "videoId": "8a8a845c820147ff0182014cc59a0000"
+}
+###
+GET localhost:8080/video_like/videoListByLiked
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5OTQ5MzksImV4cCI6MTY1Nzk5ODUzOSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.n9Ju0RPmoOZgFprH00arn8RHMbFWrUL8zkqcJlkUAHY
+
+

@@ -1,0 +1,7 @@
+GET localhost:8080/comment/adm/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5NTY2NTYsImV4cCI6MTY1Nzk2MDI1NiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.xCZzVeLPkRSLuz3GIiZf8hnNuu7l4zc5XnOI0CUToDE
+###
+GET localhost:8080/comment/user/commentList/8a8a845c820147ff0182014cc59a0000
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5NjE5NjUsImV4cCI6MTY1Nzk2NTU2NSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.kshIMEvIsVHvjePY9DMV2UC-MUngbyjYOqAT0oNcCvc

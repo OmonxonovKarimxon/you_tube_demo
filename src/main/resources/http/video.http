@@ -1,0 +1,43 @@
+POST localhost:8080/video/user/crate
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc4NzkwOTIsImV4cCI6MTY1Nzg4MjY5MiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.GapLRBt6bGSpNDu3abJJw7TJxAzYwenCYPce4c9FxEU
+
+{
+  "title": "laplop",
+  "description": "best video",
+  "attach": "5926cfb5-6336-45b8-aff5-d45cf62e594b",
+  "review": "5926cfb5-6336-45b8-aff5-d45cf62e594b",
+  "channelId": "4028818681f608d90181f60d77db0000",
+  "playlist": 6,
+  "key": "qale",
+  "tags": ["eshshak","qoy","kuchuk"]
+}
+###
+PUT localhost:8080/video/user/update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc4NzkwOTIsImV4cCI6MTY1Nzg4MjY5MiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.GapLRBt6bGSpNDu3abJJw7TJxAzYwenCYPce4c9FxEU
+
+{
+  "id": "8a8a845c820147ff0182014cc59a0000",
+  "title": "alo",
+  "description": "alo",
+  "review": "5926cfb5-6336-45b8-aff5-d45cf62e594b"
+}
+###
+PUT localhost:8080/video/user/changeStatus
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc4NzkwOTIsImV4cCI6MTY1Nzg4MjY5MiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.GapLRBt6bGSpNDu3abJJw7TJxAzYwenCYPce4c9FxEU
+
+{
+  "id": "8a8a845c820147ff0182014cc59a0000",
+ "status": "PRIVATE"
+}
+###
+GET localhost:8080/video/user/byId/8a8a845c820147ff0182014cc59a0000
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc4NzkwOTIsImV4cCI6MTY1Nzg4MjY5MiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.GapLRBt6bGSpNDu3abJJw7TJxAzYwenCYPce4c9FxEU
+
+###
+GET localhost:8080/video/user/pagination/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5MjEyMTgsImV4cCI6MTY1NzkyNDgxOCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.ZG8TGbusKhBJwBL0_o-c-ZE7FLdiQUuxd5KTMj9_aJM

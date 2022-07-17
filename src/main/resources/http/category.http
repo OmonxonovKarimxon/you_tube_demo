@@ -1,0 +1,13 @@
+POST localhost:8080/category/adm/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc1NTAyNDQsImV4cCI6MTY1NzU1Mzg0NCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.A46rR4eiLrvd3V4tDEHa7RHfrCoSNakD-8_lWMayAHg
+
+{
+  "name": "jizzax",
+  "adminId": "12"
+}
+
+###
+GET localhost:8080/category/adm/list
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc1NTAyNDQsImV4cCI6MTY1NzU1Mzg0NCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.A46rR4eiLrvd3V4tDEHa7RHfrCoSNakD-8_lWMayAHg

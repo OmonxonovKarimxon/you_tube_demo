@@ -1,0 +1,42 @@
+POST localhost:8080/playlist/user/create
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc3ODA3NjEsImV4cCI6MTY1Nzc4NDM2MSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.pKsD0ntSd1uTKMKAXxIhX5ir93lMNuBY6vywYBYkwVs
+
+{
+  "name": "funny",
+  "description": "juda qiziqarli",
+  "order": 1,
+  "channelId":"4028818681f3823c0181f3852a1f0000",
+  "Status": "PUBLIC"
+}
+
+###
+PUT localhost:8080/playlist/user/changeStatus
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc3ODM2NDIsImV4cCI6MTY1Nzc4NzI0MiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.sGuFHNklRnAdnkPOQsheC15wXrlYAOD4QcMSN5tuSdE
+
+{
+  "id": "6",
+ "status": "PRIVATE"
+
+
+}
+###
+DELETE localhost:8080/playlist/userAndAdmin/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc3ODM2NDIsImV4cCI6MTY1Nzc4NzI0MiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.sGuFHNklRnAdnkPOQsheC15wXrlYAOD4QcMSN5tuSdE
+
+####
+#GET localhost:8080/channel/pagination
+#Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc2NTIxMjcsImV4cCI6MTY1NzY1NTcyNywiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.wuBA2NEYJmW9tZUJzrrOBpKo9FgeCqLiwcSm1ONfchk
+####
+#GET localhost:8080/channel/adminAndUser/getById/4028818681f3823c0181f3852a1f0000
+#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc2ODcxMTcsImV4cCI6MTY1NzY5MDcxNywiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.pH4_5ezPetrSXLrkXlVf6MqkFc2zWeMnMwBtD-ok_8c
+#
+####
+GET localhost:8080/playlist/byId/9
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc3OTg3NzYsImV4cCI6MTY1NzgwMjM3NiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.3Yof8s5amejj8UISuagVBGFQq3kQvQ9QstCCcd0xRyQ
+
+###
+GET localhost:8080/playlist/adm/pagination
+Authorization:  Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc3OTkyNTcsImV4cCI6MTY1NzgwMjg1NywiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.0xn6TgGCxwfXsgdSzCacGE3G_YOTTOPHiNzjDq_V82o
