@@ -1,8 +1,11 @@
 package com.company.controller;
 
 
+import com.company.dto.comment.CommentLikeCreateDTO;
+import com.company.dto.comment.CommentLikeDTO;
 import com.company.dto.video.VideoLikeCreateDTO;
 import com.company.dto.video.VideoLikeDTO;
+import com.company.service.CommentLikeService;
 import com.company.service.VideoLikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,35 +13,38 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/video_like")
+@RequestMapping("/comment_like")
 @RestController
-public class VideoLikeController {
+public class CommetLikeController {
 
-    @Autowired
-    private VideoLikeService videoLikeService;
+    private final CommentLikeService commentLikeService;
+
+    public CommetLikeController(CommentLikeService commentLikeService) {
+        this.commentLikeService = commentLikeService;
+    }
 
     @PostMapping("/like")
-    public ResponseEntity<Void> like(@RequestBody VideoLikeCreateDTO dto) {
+    public ResponseEntity<Void> like(@RequestBody CommentLikeCreateDTO dto) {
 
-        videoLikeService.videoLike(dto);
+        commentLikeService.commentLike(dto);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/dislike")
-    public ResponseEntity<Void> dislike(@RequestBody VideoLikeCreateDTO dto) {
+    public ResponseEntity<Void> dislike(@RequestBody CommentLikeCreateDTO dto) {
 
-        videoLikeService.videoDislike(dto);
+        commentLikeService.commentDislike(dto);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/remove")
-    public ResponseEntity<Void> remove(@RequestBody VideoLikeCreateDTO dto) {
-        videoLikeService.removeLike(dto);
+    public ResponseEntity<Void> remove(@RequestBody CommentLikeCreateDTO dto) {
+        commentLikeService.removeLike(dto);
         return ResponseEntity.ok().build();
     }
-    @GetMapping("/videoListByLiked")
-    public ResponseEntity<?> videoListByLiked() {
-       List<VideoLikeDTO> list =  videoLikeService.videoListByLiked();
+    @GetMapping("/commentListByLiked")
+    public ResponseEntity<?> commentListByLiked() {
+       List<CommentLikeDTO> list =  commentLikeService.commentListByLiked();
         return ResponseEntity.ok().body(list);
     }
 

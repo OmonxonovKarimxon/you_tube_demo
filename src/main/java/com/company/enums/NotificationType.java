@@ -1,7 +1,6 @@
 package com.company.enums;
 
-public enum SubscriptionStatus {
+public enum NotificationType {
 
-    ACTIVE,
-    BLOCKED
+    ALL,PERSONALIZED, NONE
 }

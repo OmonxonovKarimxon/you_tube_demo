@@ -1,6 +1,6 @@
 package com.company.enums;
 
-public enum NotificationType {
+public enum ReportType {
 
-    ALL,PERSONALIZED, NONE
+ CHANNEL, VIDEO
 }

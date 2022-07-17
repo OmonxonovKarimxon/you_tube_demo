@@ -20,13 +20,16 @@ import java.util.Optional;
 @Service
 public class ProfileService {
 
-    @Autowired
-    private ProfileRepository profileRepository;
-
+    private final ProfileRepository profileRepository;
+    private final AttachService attachService;
 
     @Value("${server.url}")
     private String serverUrl;
 
+    public ProfileService(ProfileRepository profileRepository, AttachService attachService) {
+        this.profileRepository = profileRepository;
+        this.attachService = attachService;
+    }
 
 
     //admin create qiladi faqat
@@ -61,7 +64,6 @@ public class ProfileService {
     }
 
 
-
     public void changeNameSurname(ProfileDTO profileDto) {
 
         profileRepository.changeNameSurname(profileDto.getName(), profileDto.getSurname(), profileDto.getEmail());
@@ -70,9 +72,9 @@ public class ProfileService {
     public ProfileResponseDTO getProfileDetail() {
         ProfileEntity profileEntity = currentUser();
         Optional<ProfileEntity> optional = profileRepository.findByEmail(profileEntity.getEmail());
- if(optional.isEmpty()){
-     throw new BadRequestException("khsbcid isdubcisd isdbcids");
- }
+        if (optional.isEmpty()) {
+            throw new BadRequestException("khsbcid isdubcisd isdbcids");
+        }
 
         return entityToDto(optional.get());
 
@@ -89,7 +91,9 @@ public class ProfileService {
         dto.setEmail(entity.getEmail());
         return dto;
 
-    }   public ProfileEntity get(Integer id) {
+    }
+
+    public ProfileEntity get(Integer id) {
         return profileRepository.findById(id).orElseThrow(() -> {
             throw new ItemNotFoundEseption("Profile Not found");
         });
@@ -98,5 +102,17 @@ public class ProfileService {
     public ProfileEntity currentUser() {
 
         return SpringUtil.currentUser().getProfile();
+    }
+
+    //  id,profile(id,name,surname,photo(id,url))
+    public ProfileDTO profileInfo(ProfileEntity entity) {
+
+        ProfileDTO dto = new ProfileDTO();
+
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setSurname(entity.getSurname());
+        dto.setMainPhoto(attachService.getAttach(entity.getPhotoId()));
+        return dto;
     }
 }

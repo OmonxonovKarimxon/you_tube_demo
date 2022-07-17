@@ -29,22 +29,23 @@ import java.util.Optional;
 @Service
 public class VideoService {
 
-    @Autowired
-    private VideoRepository videoRepository;
-    @Autowired
-    private ProfileService profileService;
-    @Autowired
-    private AttachService attachService;
-    @Autowired
-    private TagService tagService;
-    @Autowired
-    private VideoTagRepository videoTagRepository;
-    @Autowired
-    private PlaylistVideoRepository playlistVideoRepository;
-    @Autowired
-    private VideoWatchedRepository videoWatchedRepository;
+    private final VideoRepository videoRepository;
+    private final ProfileService profileService;
+    private final AttachService attachService;
+    private final TagService tagService;
+    private final VideoTagRepository videoTagRepository;
+    private final PlaylistVideoRepository playlistVideoRepository;
+    private final VideoWatchedRepository videoWatchedRepository;
 
-
+    public VideoService(VideoRepository videoRepository, ProfileService profileService, AttachService attachService, TagService tagService, VideoTagRepository videoTagRepository, PlaylistVideoRepository playlistVideoRepository, VideoWatchedRepository videoWatchedRepository) {
+        this.videoRepository = videoRepository;
+        this.profileService = profileService;
+        this.attachService = attachService;
+        this.tagService = tagService;
+        this.videoTagRepository = videoTagRepository;
+        this.playlistVideoRepository = playlistVideoRepository;
+        this.videoWatchedRepository = videoWatchedRepository;
+    }
 
 
     public String create(VideoCreateDTO dto) {

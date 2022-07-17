@@ -1,6 +1,8 @@
 package com.company.entity;
 
+import com.company.enums.NotificationType;
 import com.company.enums.SubscriptionStatus;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "subscription")
-public class Subscription {
+public class SubscriptionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +26,6 @@ public class Subscription {
     @JoinColumn(name = "profile_id", insertable = false, updatable = false)
     private ProfileEntity profile;
 
-    @Column(name = "commet_id")
-    private Integer commentId;
-    @JoinColumn(name = "comment_id", insertable = false, updatable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
-    private CommentEntity comment;
-
     @Column(name = "channel_id")
     private String channelId;
     @JoinColumn(name = "channel_id", nullable = false,insertable = false, updatable = false)
@@ -38,7 +34,11 @@ public class Subscription {
 
     @Column()
     @Enumerated(EnumType.STRING)
-    private SubscriptionStatus status;
+    private SubscriptionStatus status= SubscriptionStatus.ACTIVE;
+
+    @Column()
+    @Enumerated(EnumType.STRING)
+    private NotificationType type= NotificationType.NONE;
 
 
     @Column(name = "created_date", nullable = false)
@@ -46,4 +46,6 @@ public class Subscription {
 
     @Column(name = "visible")
     private Boolean visible = Boolean.TRUE;
+
+
 }

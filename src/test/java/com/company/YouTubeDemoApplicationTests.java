@@ -1,18 +1,22 @@
 package com.company;
 
+import com.company.entity.SubscriptionEntity;
+import com.company.enums.NotificationType;
+import com.company.repository.SubscriptionRepository;
 import com.company.repository.VideoRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Optional;
+
 @SpringBootTest
 class YouTubeDemoApplicationTests {
 @Autowired
-private VideoRepository videoRepository;
+private SubscriptionRepository subscriptionRepository;
     @Test
     void contextLoads() {
-        boolean b = videoRepository.existsById("8a8a845c820147ff0182014cc59a0000");
-        System.out.println(b);
+
     }
 
 }

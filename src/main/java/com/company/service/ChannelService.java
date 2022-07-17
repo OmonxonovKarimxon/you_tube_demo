@@ -106,9 +106,20 @@ public class ChannelService {
     }
 
 
+
     public ChannelEntity get(String id) {
         return channelRepository.findById(id).orElseThrow(() -> {
             throw new ItemNotFoundEseption("This channel not found");
         });
     }
+    public ChannelDTO channelInfo(ChannelEntity entity){
+        ProfileEntity profileEntity = profileService.currentUser();
+        ChannelDTO dto = new ChannelDTO();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setPhotoId(attachService.getAttach(entity.getPhotoId()));
+        return dto;
+    }
+
+
 }

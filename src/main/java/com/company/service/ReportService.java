@@ -1,101 +1,78 @@
 package com.company.service;
 
 
-import com.company.dto.subscription.SubscriptionChangeNotificationDTO;
-import com.company.dto.subscription.SubscriptionChangeStatusDTO;
-import com.company.dto.subscription.SubscriptionCreateDTO;
-import com.company.dto.subscription.SubscriptionInfoDTO;
+import com.company.dto.report.ReportCreateDTO;
+import com.company.dto.report.ReportResponseDTO;
+import com.company.dto.video.VideoShortInfoDTO;
 import com.company.entity.ProfileEntity;
-import com.company.entity.SubscriptionEntity;
-import com.company.enums.SubscriptionStatus;
-import com.company.exps.ItemNotFoundEseption;
-import com.company.repository.SubscriptionRepository;
+import com.company.entity.ReportEntity;
+import com.company.mapper.VideoShortInfo;
+import com.company.repository.ReportRepository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
-public class SubscriptionService {
-    private final SubscriptionRepository subscriptionRepository;
+public class ReportService {
+    private final ReportRepository reportRepository;
     private final ProfileService profileService;
-    private final ChannelService channelService;
 
-
-    public SubscriptionService(SubscriptionRepository subscriptionRepository, ProfileService profileService, ChannelService channelService) {
-        this.subscriptionRepository = subscriptionRepository;
+    public ReportService(ReportRepository reportRepository, ProfileService profileService) {
+        this.reportRepository = reportRepository;
         this.profileService = profileService;
-        this.channelService = channelService;
     }
 
-    public String create(SubscriptionCreateDTO dto) {
+    public String create(ReportCreateDTO dto) {
         ProfileEntity profileEntity = profileService.currentUser();
-        SubscriptionEntity entity = new SubscriptionEntity();
-        entity.setChannelId(dto.getChannelId());
+        ReportEntity entity = new ReportEntity();
+        entity.setContent(dto.getContent());
         entity.setProfileId(profileEntity.getId());
-        subscriptionRepository.save(entity);
+        entity.setEntityId(dto.getEntityId());
+        entity.setReportType(dto.getType());
+        reportRepository.save(entity);
 
         return "SUCCESSFULLY";
     }
 
-    public String changeStatus(SubscriptionChangeStatusDTO dto) {
-        ProfileEntity profileEntity = profileService.currentUser();
-
-        SubscriptionEntity entity = new SubscriptionEntity();
-        Optional<SubscriptionEntity> optional = subscriptionRepository.findByChannelIdAndProfileId(dto.getChannelId(), profileEntity.getId());
-        if (optional.isEmpty()) {
-            throw new ItemNotFoundEseption("first!!! you subscribe this channel do you understand me");
-        }
-
-        subscriptionRepository.updatedStatus(dto.getChannelId(), profileEntity.getId(), dto.getStatus());
-
-        return "SUCCESSFULLY";
-    }
-
-    public String changeNotification(SubscriptionChangeNotificationDTO dto) {
-        ProfileEntity profileEntity = profileService.currentUser();
-
-        SubscriptionEntity entity = new SubscriptionEntity();
-        Optional<SubscriptionEntity> optional = subscriptionRepository.findByChannelIdAndProfileId(dto.getChannelId(), profileEntity.getId());
-        if (optional.isEmpty()) {
-            throw new ItemNotFoundEseption("first!!! you subscribe this channel do you understand me");
-        }
-
-        subscriptionRepository.updateNotification(dto.getChannelId(), profileEntity.getId(), dto.getType());
-
-        return "SUCCESSFULLY";
-    }
-
-    public List<SubscriptionInfoDTO> list() {
-        ProfileEntity profileEntity = profileService.currentUser();
-        Iterable<SubscriptionEntity> list = subscriptionRepository.findByProfileIdAndStatus(profileEntity.getId(), SubscriptionStatus.ACTIVE);
-        List<SubscriptionInfoDTO> dtoList = new ArrayList<>();
-        list.forEach(entity -> {
-            dtoList.add(subscriptionInfo(entity));
+    public PageImpl<ReportResponseDTO> pagination(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ReportEntity> reportInfoPage = reportRepository.pagination(pageable);
+        List<ReportResponseDTO> dtoList = new LinkedList<>();
+        reportInfoPage.getContent().forEach(entity -> {
+            dtoList.add(entityToDTO(entity));
         });
-        return dtoList;
+        return new PageImpl(dtoList, pageable, reportInfoPage.getTotalElements());
+
     }
 
-    private SubscriptionInfoDTO subscriptionInfo(SubscriptionEntity entity) {
-        SubscriptionInfoDTO dto = new SubscriptionInfoDTO();
+
+    public ReportResponseDTO entityToDTO(ReportEntity entity) {
+        ReportResponseDTO dto = new ReportResponseDTO();
         dto.setId(entity.getId());
-        dto.setType(entity.getType());
-        dto.setChannel(channelService.channelInfo(entity.getChannel()));
+        dto.setProfileDTO(profileService.profileInfo(entity.getProfile()));
+        dto.setContent(entity.getContent());
+        dto.setType(entity.getReportType());
         return dto;
     }
 
-    public List<SubscriptionInfoDTO> listForAdmin(Integer profileId) {
+    public String deleteById(Integer reportId) {
+        reportRepository.delete(reportId);
+        return "DELETED";
+    }
 
-        Iterable<SubscriptionEntity> list = subscriptionRepository.findByProfileIdAndStatus(profileId, SubscriptionStatus.ACTIVE);
-        List<SubscriptionInfoDTO> dtoList = new ArrayList<>();
-        list.forEach(entity -> {
-            SubscriptionInfoDTO dto = subscriptionInfo(entity);
-            dto.setCreateDate(entity.getCreatedDate());
-            dtoList.add(dto);
+    public List<ReportResponseDTO> getByUserId(Integer userId) {
+        List<ReportEntity> entityList = reportRepository.findByProfileIdAndVisible(userId, true);
+        List<ReportResponseDTO> dtoList = new LinkedList<>();
+        entityList.forEach(entity -> {
+            dtoList.add(entityToDTO(entity));
         });
         return dtoList;
-
     }
 }

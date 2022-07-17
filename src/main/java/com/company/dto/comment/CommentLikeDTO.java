@@ -1,16 +1,22 @@
 package com.company.dto.comment;
 
-import com.company.dto.video.VideoDTO;
+import com.company.enums.LikeStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CommentLikeCreateDTO {
+public class CommentLikeDTO {
 
+private Integer id;
+private Integer profileId;
+private LikeStatus status;
+private Integer commentId;
+private LocalDateTime createDate;
 
-    private  Integer commentId;
 
 }

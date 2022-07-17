@@ -1,19 +1,20 @@
 package com.company.mapper;
 
+import com.company.enums.LikeStatus;
+
 import java.time.LocalDateTime;
 
-public interface VideoLikeInfo {
+public interface CommentLikeInfo {
 
-    // id,video(id,name, ,channel(id,name),duration),preview_attach(id,url)
+    //    id,profile_id,comment_id,created_date,type(Like,Dislike)
     Integer getId();
 
-    String getVideoId();
+    Integer getProfileId();
 
-    String getVideoPreview();
+    Integer getCommentId();
 
-    String getChannelId();
+    LocalDateTime getCreateDate();
 
-
-    String getChannelName();
+    LikeStatus getStatus();
 
 }

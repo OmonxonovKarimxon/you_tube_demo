@@ -2,16 +2,19 @@ package com.company.service;
 
 
 import com.company.dto.channel.ChannelDTO;
+import com.company.dto.comment.CommentLikeCreateDTO;
+import com.company.dto.comment.CommentLikeDTO;
 import com.company.dto.video.VideoDTO;
 import com.company.dto.video.VideoLikeCreateDTO;
 import com.company.dto.video.VideoLikeDTO;
+import com.company.entity.CommentLikeEntity;
 import com.company.entity.ProfileEntity;
-import com.company.entity.VideoEntity;
 import com.company.entity.VideoLikeEntity;
 import com.company.enums.LikeStatus;
 import com.company.exps.ItemNotFoundEseption;
 import com.company.mapper.VideoLikeInfo;
-import com.company.repository.VideoLikeRepository;
+import com.company.repository.CommentLikeRepository;
+import com.company.repository.CommentRepository;
 import com.company.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,82 +24,75 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class VideoLikeService {
+public class CommentLikeService {
 
     @Autowired
     private ProfileService profileService;
     @Autowired
-    private VideoLikeRepository videoLikeRepository;
+    private CommentLikeRepository commentLikeRepository;
     @Autowired
-    private VideoRepository videoRepository;
+    private CommentRepository commentRepository;
     @Autowired
     private AttachService attachService;
 
-    public void videoLike(VideoLikeCreateDTO dto) {
+    public void commentLike(CommentLikeCreateDTO dto) {
         ProfileEntity profileEntity = profileService.currentUser();
 
-        likeDislike(dto.getVideoId(), profileEntity.getId(), LikeStatus.LIKE);
+        likeDislike(dto.getCommentId(), profileEntity.getId(), LikeStatus.LIKE);
     }
 
-    public void videoDislike(VideoLikeCreateDTO dto) {
+    public void commentDislike(CommentLikeCreateDTO dto) {
         ProfileEntity profileEntity = profileService.currentUser();
-        likeDislike(dto.getVideoId(), profileEntity.getId(), LikeStatus.DISLIKE);
+        likeDislike(dto.getCommentId(), profileEntity.getId(), LikeStatus.DISLIKE);
     }
 
-    private void likeDislike(String videoId, Integer pId, LikeStatus status) {
-        Optional<VideoLikeEntity> optional = videoLikeRepository.findExists(videoId, pId);
+    private void likeDislike(Integer commentId, Integer pId, LikeStatus status) {
+        Optional<CommentLikeEntity> optional = commentLikeRepository.findExists(commentId, pId);
         if (optional.isPresent()) {
-            VideoLikeEntity like = optional.get();
+            CommentLikeEntity like = optional.get();
             like.setStatus(status);
-            videoLikeRepository.save(like);
+            commentLikeRepository.save(like);
             return;
         }
 
-        boolean b = videoRepository.existsById(videoId);
+        boolean b = commentRepository.existsById(commentId);
         if (!b) {
-            throw new ItemNotFoundEseption("video Not Found");
+            throw new ItemNotFoundEseption("comment Not Found");
         }
-        VideoLikeEntity entity = new VideoLikeEntity();
-        entity.setVideoId(videoId);
+        CommentLikeEntity entity = new CommentLikeEntity();
+        entity.setCommentId(commentId);
         entity.setProfileId(pId);
         entity.setStatus(status);
-        videoLikeRepository.save(entity);
+        commentLikeRepository.save(entity);
 
     }
 
-    public void removeLike( VideoLikeCreateDTO dto) {
+    public void removeLike(CommentLikeCreateDTO dto) {
         ProfileEntity profileEntity = profileService.currentUser();
-     videoLikeRepository.delete(dto.getVideoId(), profileEntity.getId());
+        commentLikeRepository.delete(dto.getCommentId(), profileEntity.getId());
 
     }
-    public VideoLikeDTO likeInfo(VideoLikeInfo entity){
-        VideoLikeDTO dto = new VideoLikeDTO();
+
+    public CommentLikeDTO likeInfo(CommentLikeEntity entity) {
+        CommentLikeDTO dto = new CommentLikeDTO();
         dto.setId(entity.getId());
+        dto.setCommentId(entity.getCommentId());
+        dto.setCreateDate(entity.getCreatedDate());
+        dto.setStatus(entity.getStatus());
+        dto.setProfileId(entity.getProfileId());
 
-        VideoDTO videoDTO = new VideoDTO();
-        videoDTO.setId(entity.getVideoId());
-        videoDTO.setName(entity.getChannelName());
-
-        ChannelDTO channelDTO = new ChannelDTO();
-        channelDTO.setId(entity.getChannelId());
-        channelDTO.setName(entity.getChannelName());
-        videoDTO.setChannel(channelDTO);
-
-        videoDTO.setAttach(attachService.getAttach(entity.getVideoPreview()));
-
-        dto.setVideoDTO(videoDTO);
 
         return dto;
     }
 
 
-    public List<VideoLikeDTO> videoListByLiked() {
+    public List<CommentLikeDTO> commentListByLiked() {
         ProfileEntity profileEntity = profileService.currentUser();
-       List<VideoLikeInfo> videoLikeInfos= videoLikeRepository.videoListByLiked(profileEntity.getId());
-       List<VideoLikeDTO> dtoList = new LinkedList<>();
-        videoLikeInfos.forEach(entity->{
+        List<CommentLikeEntity> entityList = commentLikeRepository.videoListByLiked(profileEntity.getId());
+        List<CommentLikeDTO> dtoList = new LinkedList<>();
+        entityList.forEach(entity -> {
             dtoList.add(likeInfo(entity));
         });
-        return  dtoList;
+        return dtoList;
     }
 }

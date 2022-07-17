@@ -1,20 +1,20 @@
-POST localhost:8080/subscription/user/create
+POST localhost:8080/report/user/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgwNjI3NDcsImV4cCI6MTY1ODA2NjM0NywiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.KiN5pETx3zKLirQrgdSv-bx_2_RbwbEg9Q3EltBexOA
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgwODEwMTAsImV4cCI6MTY1ODA4NDYxMCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.vFdOWzNxIuc9QO4lk2TU7PyWi-RLRbCoieY4Pd3xWJA
 
 {
-  "channelId": "4028818681f3823c0181f3852a1f0000"
+  "entityId": "4028818681f3823c0181f3852a1f0000",
+  "type": "CHANNEL",
+  "content": "yaxshi chanak emas ekan"
 }
 
 ###
-PUT localhost:8080/subscription/user/changeNotification
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgwNjc1NjYsImV4cCI6MTY1ODA3MTE2NiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.0T4O7WW6oH-3TsB7EaKhWw0HImwHy7RXZ5SWp4YtBP0
 
-{
-  "channelId": "4028818681f3823c0181f3852a1f0000",
-  "type": "NONE"
-}
+GET localhost:8080/report/adm/deleteById/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgwODQ0NzYsImV4cCI6MTY1ODA4ODA3NiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.CQzerNqCyShoH5qz3CIAs-bWVOpbmThk700E7BfLj1w
+
+
 ###
-GET localhost:8080/subscription/adm/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgwNzgwMzYsImV4cCI6MTY1ODA4MTYzNiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.QLkyjoXp9DeSAo7SZQUGeHjIMPmx1bkD50X_q1-fW2c
+
+GET localhost:8080/report/adm/list/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgwODQ0NzYsImV4cCI6MTY1ODA4ODA3NiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.CQzerNqCyShoH5qz3CIAs-bWVOpbmThk700E7BfLj1w

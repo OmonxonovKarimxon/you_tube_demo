@@ -17,12 +17,14 @@ public class CommentLikeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "profile_id")
+    private Integer profileId;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profile_id")
+    @JoinColumn(name = "profile_id", insertable = false, updatable = false)
     private ProfileEntity profile;
 
-    @Column(name = "commet_id")
-    private String videoId;
+    @Column(name = "comment_id")
+    private Integer commentId;
     @JoinColumn(name = "comment_id", insertable = false, updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private CommentEntity comment;

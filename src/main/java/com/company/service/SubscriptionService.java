@@ -1,74 +1,101 @@
 package com.company.service;
 
 
-import com.company.dto.category.CategoryCreateDTO;
-import com.company.dto.category.CategoryDTO;
-import com.company.entity.CategoryEntity;
+import com.company.dto.subscription.SubscriptionChangeNotificationDTO;
+import com.company.dto.subscription.SubscriptionChangeStatusDTO;
+import com.company.dto.subscription.SubscriptionCreateDTO;
+import com.company.dto.subscription.SubscriptionInfoDTO;
 import com.company.entity.ProfileEntity;
-import com.company.exps.BadRequestException;
+import com.company.entity.SubscriptionEntity;
+import com.company.enums.SubscriptionStatus;
 import com.company.exps.ItemNotFoundEseption;
-import com.company.repository.CategoryRepository;
-import com.company.util.SpringUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.company.repository.SubscriptionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-;
 
 @Service
-public class CategoryService {
-    @Autowired
-    private CategoryRepository categoryRepository;
+public class SubscriptionService {
+    private final SubscriptionRepository subscriptionRepository;
+    private final ProfileService profileService;
+    private final ChannelService channelService;
 
-    public void create(CategoryCreateDTO dto) {
-        ProfileEntity profileEntity = currentUser();
 
-        CategoryEntity entity = new CategoryEntity();
-       entity.setName(dto.getName());
-       entity.setAdminId(profileEntity.getId());
-       categoryRepository.save(entity);
+    public SubscriptionService(SubscriptionRepository subscriptionRepository, ProfileService profileService, ChannelService channelService) {
+        this.subscriptionRepository = subscriptionRepository;
+        this.profileService = profileService;
+        this.channelService = channelService;
     }
-    public void update(CategoryDTO dto) {
-        ProfileEntity profileEntity = currentUser();
 
-        Optional<CategoryEntity> optional = categoryRepository.findById(dto.getId());
-        if(optional.isEmpty()){
-            throw  new BadRequestException("we have not this  category");
+    public String create(SubscriptionCreateDTO dto) {
+        ProfileEntity profileEntity = profileService.currentUser();
+        SubscriptionEntity entity = new SubscriptionEntity();
+        entity.setChannelId(dto.getChannelId());
+        entity.setProfileId(profileEntity.getId());
+        subscriptionRepository.save(entity);
+
+        return "SUCCESSFULLY";
+    }
+
+    public String changeStatus(SubscriptionChangeStatusDTO dto) {
+        ProfileEntity profileEntity = profileService.currentUser();
+
+        SubscriptionEntity entity = new SubscriptionEntity();
+        Optional<SubscriptionEntity> optional = subscriptionRepository.findByChannelIdAndProfileId(dto.getChannelId(), profileEntity.getId());
+        if (optional.isEmpty()) {
+            throw new ItemNotFoundEseption("first!!! you subscribe this channel do you understand me");
         }
-       categoryRepository.updateName(dto.getName(),profileEntity.getId());
 
+        subscriptionRepository.updatedStatus(dto.getChannelId(), profileEntity.getId(), dto.getStatus());
+
+        return "SUCCESSFULLY";
     }
 
-    public void delete(Integer id) {
-        Optional<CategoryEntity> optional = categoryRepository.findById(id);
-        if(optional.isEmpty()){
-            throw  new BadRequestException("we have not this  category");
+    public String changeNotification(SubscriptionChangeNotificationDTO dto) {
+        ProfileEntity profileEntity = profileService.currentUser();
+
+        SubscriptionEntity entity = new SubscriptionEntity();
+        Optional<SubscriptionEntity> optional = subscriptionRepository.findByChannelIdAndProfileId(dto.getChannelId(), profileEntity.getId());
+        if (optional.isEmpty()) {
+            throw new ItemNotFoundEseption("first!!! you subscribe this channel do you understand me");
         }
-        categoryRepository.deleteById(id);
+
+        subscriptionRepository.updateNotification(dto.getChannelId(), profileEntity.getId(), dto.getType());
+
+        return "SUCCESSFULLY";
     }
 
-
-    public List<CategoryDTO> getListOnlyForAdmin() {
-        List<CategoryEntity> allByVisible = categoryRepository.findAllByVisible(true);
-        List<CategoryDTO> dtoList  = new ArrayList<>();
-        allByVisible.forEach(entity -> {
-            dtoList.add(entityToDTO(entity));
+    public List<SubscriptionInfoDTO> list() {
+        ProfileEntity profileEntity = profileService.currentUser();
+        Iterable<SubscriptionEntity> list = subscriptionRepository.findByProfileIdAndStatus(profileEntity.getId(), SubscriptionStatus.ACTIVE);
+        List<SubscriptionInfoDTO> dtoList = new ArrayList<>();
+        list.forEach(entity -> {
+            dtoList.add(subscriptionInfo(entity));
         });
         return dtoList;
     }
 
-private CategoryDTO entityToDTO(CategoryEntity entity){
-        CategoryDTO dto = new CategoryDTO();
+    private SubscriptionInfoDTO subscriptionInfo(SubscriptionEntity entity) {
+        SubscriptionInfoDTO dto = new SubscriptionInfoDTO();
         dto.setId(entity.getId());
-        dto.setName(entity.getName());
-        dto.setAdminId(entity.getAdminId());
+        dto.setType(entity.getType());
+        dto.setChannel(channelService.channelInfo(entity.getChannel()));
         return dto;
-}
-    public ProfileEntity currentUser() {
-        return SpringUtil.currentUser().getProfile();
     }
 
+    public List<SubscriptionInfoDTO> listForAdmin(Integer profileId) {
+
+        Iterable<SubscriptionEntity> list = subscriptionRepository.findByProfileIdAndStatus(profileId, SubscriptionStatus.ACTIVE);
+        List<SubscriptionInfoDTO> dtoList = new ArrayList<>();
+        list.forEach(entity -> {
+            SubscriptionInfoDTO dto = subscriptionInfo(entity);
+            dto.setCreateDate(entity.getCreatedDate());
+            dtoList.add(dto);
+        });
+        return dtoList;
+
+    }
 }
