@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class YouTubeCloneApplication {
+public class YouTubeDemoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(YouTubeCloneApplication.class, args);
+        SpringApplication.run(YouTubeDemoApplication.class, args);
     }
 
 }
