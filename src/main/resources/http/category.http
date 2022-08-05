@@ -1,6 +1,6 @@
 POST localhost:8080/category/adm/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc1NTAyNDQsImV4cCI6MTY1NzU1Mzg0NCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.A46rR4eiLrvd3V4tDEHa7RHfrCoSNakD-8_lWMayAHg
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTk3MjE1MjEsImV4cCI6MTY1OTcyNTEyMSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.wbNZyeq7ZXPO3hm4UgjDIeMBogHOEdAMp_e0kM9GRB0
 
 {
   "name": "jizzax",
@@ -10,4 +10,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc1NTAyNDQsImV4cCI6MTY1N
 ###
 GET localhost:8080/category/adm/list
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc1NTAyNDQsImV4cCI6MTY1NzU1Mzg0NCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.A46rR4eiLrvd3V4tDEHa7RHfrCoSNakD-8_lWMayAHg
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTk3MjE1MjEsImV4cCI6MTY1OTcyNTEyMSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.wbNZyeq7ZXPO3hm4UgjDIeMBogHOEdAMp_e0kM9GRB0
