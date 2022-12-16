@@ -6,7 +6,6 @@ import com.company.dto.category.CategoryDTO;
 import com.company.entity.CategoryEntity;
 import com.company.entity.ProfileEntity;
 import com.company.exps.BadRequestException;
-import com.company.exps.ItemNotFoundEseption;
 import com.company.repository.CategoryRepository;
 import com.company.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;

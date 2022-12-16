@@ -8,7 +8,6 @@ import com.company.dto.email.EmailUpdateDTO;
 import com.company.service.AuthService;
 import com.company.util.JwtUtil;
 import io.swagger.annotations.Api;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +33,7 @@ public class AuthController {
     @PostMapping("/public/login")
     public ResponseEntity<ProfileDTO> login(@RequestBody @Valid AuthDTO dto) {
 
+
         ProfileDTO profileDto = authService.login(dto);
         return ResponseEntity.ok().body(profileDto);
     }
@@ -43,6 +43,7 @@ public class AuthController {
         authService.updateEmail(dto.getEmail());
         return ResponseEntity.ok().build();
     }
+
     @GetMapping("/public/email/verification/{jwt}")
     public ResponseEntity<String> verification(@PathVariable("jwt") String jwt) {
         String response = authService.emailVerification(JwtUtil.decode(jwt));

@@ -2,10 +2,10 @@ POST localhost:8080/auth/public/registration
 Content-Type: application/json
 
 {
-  "name": "shoh",
+  "name": "shoh1",
   "surname": "Qurbonov",
-  "email": "suxrobbek997@gmail.com",
-  "password": "1111"
+  "email": "omonxonovsaidkarim1998@gmail.com",
+  "password": "12345"
 }
 
 ###

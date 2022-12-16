@@ -58,7 +58,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         } catch (JwtException e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.addHeader("Message", "Some Error");
-            return;
+
         }
 
 
