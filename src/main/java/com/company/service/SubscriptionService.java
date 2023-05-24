@@ -45,7 +45,7 @@ public class SubscriptionService {
 
         SubscriptionEntity entity = new SubscriptionEntity();
         Optional<SubscriptionEntity> optional = subscriptionRepository.findByChannelIdAndProfileId(dto.getChannelId(), profileEntity.getId());
-        if (optional.isEmpty()) {
+        if (!optional.isPresent()) {
             throw new ItemNotFoundEseption("first!!! you subscribe this channel do you understand me");
         }
 
@@ -59,7 +59,7 @@ public class SubscriptionService {
 
         SubscriptionEntity entity = new SubscriptionEntity();
         Optional<SubscriptionEntity> optional = subscriptionRepository.findByChannelIdAndProfileId(dto.getChannelId(), profileEntity.getId());
-        if (optional.isEmpty()) {
+        if (!optional.isPresent()) {
             throw new ItemNotFoundEseption("first!!! you subscribe this channel do you understand me");
         }
 

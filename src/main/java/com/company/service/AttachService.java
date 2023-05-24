@@ -23,6 +23,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -135,14 +136,14 @@ public class AttachService {
 
     public String delete(String id) {
         Optional<AttachEntity> byId = attachRepository.findById(id);
-        if (byId.isEmpty()) {
+        if (!byId.isPresent()) {
             throw new ItemNotFoundEseption("Mazgimisan bunaqa attach yo'q");
         }
         AttachEntity entity = byId.get();
         String path = getFileFullPath(entity);
 
         try {
-            Files.delete(Path.of(path));
+            Files.delete(FileSystems.getDefault().getPath(path));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

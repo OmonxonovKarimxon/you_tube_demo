@@ -1,7 +1,6 @@
 
 DELETE localhost:8080/attach/delete/894da3c2-a01e-43ed-afd2-7d5660517014
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTcwMjU1NjMsImV4cCI6MTY1NzAyOTE2MywiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.TWlEy_-pdRMhnqDeyo-qjrrC3ipaLAHh7g9JnQ9fYh0
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODEwNDM4ODEsImV4cCI6MTY4MTA0NzQ4MSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.gyXjG_zxM1C2goYVmMgQSgPSAqUGHXxlTmxj_UQWST8
 
 ###
 POST http://localhost:8080/attach/upload
@@ -10,7 +9,7 @@ Content-Type: multipart/form-data; boundary=WebAppBoundary
 --WebAppBoundary
 Content-Disposition: form-data; name="file"; filename="download.jpg"
 
-< C:\Users\Karimxon\Desktop\1\download.jpg
+< C:\Users\KARIMXON\Desktop\download.jpg
 
 ###
 GET http://localhost:8080/attach/open_general/65da5f2d-4d02-4666-8b94-03a33e02c719

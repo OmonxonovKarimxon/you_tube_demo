@@ -34,7 +34,7 @@ public class CategoryService {
         ProfileEntity profileEntity = currentUser();
 
         Optional<CategoryEntity> optional = categoryRepository.findById(dto.getId());
-        if(optional.isEmpty()){
+        if(!optional.isPresent()){
             throw  new BadRequestException("we have not this  category");
         }
        categoryRepository.updateName(dto.getName(),profileEntity.getId());
@@ -43,7 +43,7 @@ public class CategoryService {
 
     public void delete(Integer id) {
         Optional<CategoryEntity> optional = categoryRepository.findById(id);
-        if(optional.isEmpty()){
+        if(!optional.isPresent()){
             throw  new BadRequestException("we have not this  category");
         }
         categoryRepository.deleteById(id);

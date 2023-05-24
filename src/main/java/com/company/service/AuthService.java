@@ -70,7 +70,7 @@ public class AuthService {
         }
         profileRepository.save(entity);
 
-        emailService.sendRegistrationEmail(entity.getEmail(), entity.getId());
+     //   emailService.sendRegistrationEmail(entity.getEmail(), entity.getId());
 
         return "Successfully";
     }

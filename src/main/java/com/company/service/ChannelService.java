@@ -46,7 +46,7 @@ public class ChannelService {
         ProfileEntity profileEntity = profileService.currentUser();
         Optional<ChannelEntity> optional = channelRepository.findByIdAndVisible(dto.getId(), true);
 
-        if (optional.isEmpty()||optional.get().getProfileId()!=profileEntity.getId()) {
+        if (!optional.isPresent()||optional.get().getProfileId()!=profileEntity.getId()) {
             throw new ItemNotFoundEseption("you have not this channel");
         }
         ChannelEntity entity = optional.get();
@@ -88,7 +88,7 @@ public class ChannelService {
     public ChannelDTO getById(String id) {
         Optional<ChannelEntity> optional = channelRepository.findByIdAndVisible(id, true);
 
-        if (optional.isEmpty()) {
+        if (!optional.isPresent()) {
             throw new ItemNotFoundEseption("you have not this channel");
         }
         return entityToDTO(optional.get());

@@ -13,8 +13,8 @@ POST localhost:8080/auth/public/login
 Content-Type: application/json
 
 {
-  "email": "shoh@gmail.com",
-  "password": "1111"
+  "email": "omonxonovsaidkarim1998@gmail.com",
+  "password": "12345"
 }
 
 ###
@@ -23,7 +23,7 @@ Content-Type: application/json
 
 {
   "email": "omonxonovsaidkarim1998@gmail.com",
-  "password": "00"
+  "password": "12345"
 }
 
 ###

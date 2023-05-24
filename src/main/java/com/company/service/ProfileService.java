@@ -72,7 +72,7 @@ public class ProfileService {
     public ProfileResponseDTO getProfileDetail() {
         ProfileEntity profileEntity = currentUser();
         Optional<ProfileEntity> optional = profileRepository.findByEmail(profileEntity.getEmail());
-        if (optional.isEmpty()) {
+        if (!optional.isPresent()) {
             throw new BadRequestException("khsbcid isdubcisd isdbcids");
         }
 
